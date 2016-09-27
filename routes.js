@@ -20,4 +20,5 @@ module.exports = [
     handler: Assets.servePublicDirectory,
   },
 
+  { method: 'POST', path: '/donate', config: Donations.donate },
 ];
