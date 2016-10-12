@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /* configuration for mongolab database */
 
-let dbURI = 'mongodb://donationuser:donationuser@ds057066.mlab.com:57066/donation';
+var dbURI = 'mongodb://donationuser:donationuser@ds057066.mlab.com:57066/donation';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
