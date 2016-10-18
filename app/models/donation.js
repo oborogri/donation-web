@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const Candidate = require('../models/candidate');
 
 const donationSchema = mongoose.Schema({
   amount: Number,
@@ -7,6 +8,11 @@ const donationSchema = mongoose.Schema({
   donor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+  },
+
+  candidate:  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Candidate',
   },
 });
 
