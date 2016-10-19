@@ -3,6 +3,7 @@
 const User = require('../models/user');
 const Donation = require('../models/donation');
 const Candidate = require('../models/candidate');
+const Joi = require('joi');
 
 exports.home = {
   handler: function (request, reply) {
@@ -19,6 +20,26 @@ exports.home = {
 };
 
 exports.donate = {
+
+  validate: {
+
+    payload: {
+      amount: Joi.number().integer().required(),
+      method: Joi.string().required(),
+      candidate: Joi.string().required(),
+    },
+
+    failAction: function (request, reply, source, error) {
+      reply.view('home', {
+        title: 'Donate error',
+        errors: error.data.details,
+      }).code(400);
+    },
+
+    options: {
+      abortEarly: false,
+    },
+  },
 
   handler: function (request, reply) {
     var userEmail = request.auth.credentials.loggedInUser;
