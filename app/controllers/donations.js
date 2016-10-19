@@ -24,20 +24,25 @@ exports.donate = {
   validate: {
 
     payload: {
-      amount: Joi.number().integer().required(),
+      amount: Joi.number().required(),
       method: Joi.string().required(),
       candidate: Joi.string().required(),
     },
 
-    failAction: function (request, reply, source, error) {
-      reply.view('home', {
-        title: 'Donate error',
-        errors: error.data.details,
-      }).code(400);
-    },
-
     options: {
       abortEarly: false,
+    },
+
+    failAction: function (request, reply, source, error) {
+      Candidate.find({}).then(candidates => {
+        reply.view('home', {
+          title: 'Invalid Donation',
+          candidates: candidates,
+          errors: error.data.details,
+        }).code(400);
+      }).catch(err => {
+        reply.redirect('/');
+      });
     },
   },
 
@@ -61,16 +66,16 @@ exports.donate = {
       reply.redirect('/');
     });
   },
-};
 
+};
 exports.report = {
 
   handler: function (request, reply) {
     Donation.find({}).populate('donor').populate('candidate').then(allDonations => {
       let total = 0;
-      for (let i = 0; i < allDonations.length; i += 1) {
-        total += allDonations[i].amount;
-      }
+      allDonations.forEach(donation => {
+        total += donation.amount;
+      });
 
       reply.view('report', {
         title: 'Donations to Date',
