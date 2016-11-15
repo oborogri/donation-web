@@ -1,6 +1,6 @@
 'use strict';
 
-const Candidate = require('../models/candidate');
+const User = require('../models/user');
 const Boom = require('boom');
 
 exports.find = {
@@ -8,8 +8,8 @@ exports.find = {
   auth: false,
 
   handler: function (request, reply) {
-    Candidate.find({}).exec().then(candidates => {
-      reply(candidates);
+    User.find({}).exec().then(users => {
+      reply(users);
     }).catch(err => {
       reply(Boom.badImplementation('error accessing db'));
     });
@@ -22,12 +22,13 @@ exports.findOne = {
   auth: false,
 
   handler: function (request, reply) {
-    Candidate.findOne({ _id: request.params.id }).then(candidate => {
-      reply(candidate);
+    User.findOne({ _id: request.params.id }).then(user => {
+      reply(user);
     }).catch(err => {
       reply(Boom.notFound('id not found'));
     });
   },
+
 };
 
 exports.create = {
@@ -35,11 +36,11 @@ exports.create = {
   auth: false,
 
   handler: function (request, reply) {
-    const candidate = new Candidate(request.payload);
-    candidate.save().then(newCandidate => {
-      reply(newCandidate).code(201);
+    const user = new User(request.payload);
+    user.save().then(newUser => {
+      reply(newUser).code(201);
     }).catch(err => {
-      reply(Boom.badImplementation('error creating candidate'));
+      reply(Boom.badImplementation('error creating User'));
     });
   },
 
@@ -50,10 +51,10 @@ exports.deleteAll = {
   auth: false,
 
   handler: function (request, reply) {
-    Candidate.remove({}).then(err => {
+    User.remove({}).then(err => {
       reply().code(204);
     }).catch(err => {
-      reply(Boom.badImplementation('error removing candidates'));
+      reply(Boom.badImplementation('error removing Users'));
     });
   },
 
@@ -64,8 +65,8 @@ exports.deleteOne = {
   auth: false,
 
   handler: function (request, reply) {
-    Candidate.remove({ _id: request.params.id }).then(candidate => {
-      reply(candidate).code(204);
+    User.remove({ _id: request.params.id }).then(user => {
+      reply(User).code(204);
     }).catch(err => {
       reply(Boom.notFound('id not found'));
     });

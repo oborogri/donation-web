@@ -3,19 +3,18 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-/* configuration for local mongodb database
+//configuration for local mongodb database
 
 let dbURI = 'mongodb://localhost/donation';
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
-*/
 
-/* configuration for mongolab database */
-var dbURI = 'mongodb://donationuser:donationuser@ds057066.mlab.com:57066/donation';
-if (process.env.NODE_ENV === 'production') {
-  dbURI = process.env.MONGOLAB_URI;
-}
+//configuration for mongolab database
+//var dbURI = 'mongodb://donationuser:donationuser@ds057066.mlab.com:57066/donation';
+//if (process.env.NODE_ENV === 'production') {
+//  dbURI = process.env.MONGOLAB_URI;
+//}
 
 mongoose.connect(dbURI);
 
