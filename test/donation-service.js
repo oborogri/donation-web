@@ -32,6 +32,14 @@ class DonationService {
   createUser(newUser) {
     return this.httpService.post('/api/users', newUser);
   }
+
+  deleteAllCandidates() {
+    return this.httpService.delete('/api/candidates');
+  }
+
+  deleteOneCandidate(id) {
+    return this.httpService.delete('/api/candidates/' + id);
+  }
 }
 
 module.exports = DonationService;
