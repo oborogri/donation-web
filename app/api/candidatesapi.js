@@ -75,5 +75,4 @@ exports.deleteOne = {
       reply(Boom.notFound('id not found'));
     });
   },
-
 };

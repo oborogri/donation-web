@@ -1,8 +1,8 @@
 'use strict';
 
 const assert = require('chai').assert;
-const DonationService = require('./donation-service');
 const fixtures = require('./fixtures.json');
+const DonationService = require('./donation-service');
 const _ = require('lodash');
 
 suite('Candidate API tests', function () {
@@ -10,7 +10,7 @@ suite('Candidate API tests', function () {
   let candidates = fixtures.candidates;
   let newCandidate = fixtures.newCandidate;
 
-  const donationService = new DonationService('https://peaceful-oasis-30048.herokuapp.com/');
+  const donationService = new DonationService(fixtures.donationService);
 
   beforeEach(function () {
     donationService.deleteAllCandidates();
@@ -22,7 +22,8 @@ suite('Candidate API tests', function () {
 
   test('create a candidate', function () {
     const returnedCandidate = donationService.createCandidate(newCandidate);
-    assert(_.some([returnedCandidate], newCandidate), 'returnedCandidate must be a superset of newCandidate');
+    assert(_.some([returnedCandidate], newCandidate), 'returnedCandidate ' +
+        'must be a superset of newCandidate');
     assert.isDefined(returnedCandidate._id);
   });
 

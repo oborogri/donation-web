@@ -1,5 +1,5 @@
 {
-  "donationService": "https://peaceful-oasis-30048.herokuapp.com/",
+  "donationService": "http://localhost:4000",
   "users": [
     {
       "firstName": "Homer",

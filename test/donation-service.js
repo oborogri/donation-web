@@ -40,6 +40,14 @@ class DonationService {
   deleteOneCandidate(id) {
     return this.httpService.delete('/api/candidates/' + id);
   }
+
+  deleteOneUser(id) {
+    return this.httpService.delete('/api/users/' + id);
+  }
+
+  deleteAllUsers() {
+    return this.httpService.delete('/api/users');
+  }
 }
 
 module.exports = DonationService;
