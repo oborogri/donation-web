@@ -32,6 +32,20 @@
       "office": "President"
     }
   ],
+  "donations": [
+    {
+      "amount": 40,
+      "method": "paypal"
+    },
+    {
+      "amount": 90,
+      "method": "direct"
+    },
+    {
+      "amount": 430,
+      "method": "paypal"
+    }
+  ],
   "newCandidate": {
     "firstName": "Barnie",
     "lastName": "Grumble",
